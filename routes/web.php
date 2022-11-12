@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Breezeで更地になったweb.php...悲しい！(*´Д｀*)
 Route::get('/', function () {
     return view('welcome');
 });
