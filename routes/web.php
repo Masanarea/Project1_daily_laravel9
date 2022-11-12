@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Breezeの導入によって更地になったweb.phpを確認...悲しい！(´Д｀)
+// 今後はauth.phpを参考にすればよさそう...
 Route::get('/', function () {
     return view('welcome');
 });
