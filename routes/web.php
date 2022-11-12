@@ -11,7 +11,7 @@
 // https://reffect.co.jp/laravel/laravel-service-provider-understand
 // ファサード(Facade)
 // https://reffect.co.jp/laravel/laravel-facade-understanding
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;//laravel9からは、おそらく直がき？
 
 /*
 |--------------------------------------------------------------------------
