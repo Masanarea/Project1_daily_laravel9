@@ -62,7 +62,8 @@
         <!-- END layout-wrapper -->
 
         <!-- Right Sidebar -->
-        <!-- <div class="right-bar">
+        <!-- ここのRight Sidebarは本来は消して作業を進めるが、CSSが崩れてしまうのでこのまま進める -->
+        <div class="right-bar">
             <div data-simplebar class="h-100">
                 <div class="rightbar-title d-flex align-items-center px-3 py-4">
             
@@ -106,7 +107,7 @@
                 </div>
 
             </div>
-        </div> -->
+        </div>
         <!-- /Right-bar -->
 
         <!-- Right bar overlay-->

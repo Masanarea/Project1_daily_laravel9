@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,16 @@ use Illuminate\Support\Facades\Route;
 // 今後はauth.phpを参考にすればよさそう...
 Route::get('/', function () {
     return view('welcome');
+});
+
+// 具体例
+// Route::controller(DemoController::class)->group(function () {
+//     Route::get('/about', 'Index')->name('about.page')->middleware('check');
+//     Route::get('/about', 'Index')->name('about.page')->middleware('check');
+// });
+
+Route::controller(AdminController::class)->group(function () {
+    Route::get('/admin/logout', 'destroy')->name('admin.logout');
 });
 
 Route::get('/dashboard', function () {
