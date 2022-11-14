@@ -14,7 +14,12 @@
                     <div class="card-body">
                         <h4 class="card-title">Edit Profile</h4>
                         <!-- List一覧 -->
-                        <form action="">
+                        <!-- -----------------------------146617270317...のような区切り文字をboundaryと呼び、
+                        この区切りを使って複数のパートに分割することからマルチパートと呼ばれている -->
+                        <!-- https://mugenup-tech.hatenadiary.com/entry/2014/08/28/100910 -->
+                        <!-- enctype指定ありでは、Content-DispositionやContent-Typeなど添付ファイルに関する情報とともに、
+                        ファイルの本文の情報が存在する -->
+                        <form method="POST" action="{{ route('store.profile') }}" enctype="multipart/form-data">
                             <div class="row mb-3">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">
