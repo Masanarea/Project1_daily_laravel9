@@ -25,10 +25,21 @@ class AdminController extends Controller
         return redirect('/login');
     }
 
-    public function Profile(Request $request)
+    public function Profile()
     {
         $id = Auth::user()->id;
         $adminData = User::find($id);
+        // https://qiita.com/ryo2132/items/63ced19601b3fa30e6de
+        //(compact()やwith()に関して)
+        // 変数を一つ受け渡す場合はcompact関数又はwithメソッドで送信。
+        // compactの方が可読性が高いのでそちらを使うことが多い。
         return view('admin.admin_profile_view', compact('adminData'));
+    }
+
+    public function EditProfile()
+    {
+        $id = Auth::user()->id;
+        $editData = User::find($id);
+        return view('admin.admin_profile_edit', compact('editData'));
     }
 }

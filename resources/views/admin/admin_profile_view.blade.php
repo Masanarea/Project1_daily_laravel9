@@ -9,7 +9,9 @@
             <div class="col-lg-6">
                 <div class="card"><br><br>
                     <!-- <center></center>で中央寄せできる！！！すごい時代だ！ -->
-                    <center><img class="rounded-circle avatar-xl" src="{{  asset('backend/') }}/assets/images/small/img-5.jpg" alt="Card image cap"></center>
+                    <center>
+                        <img class="rounded-circle avatar-xl" src="{{  asset('backend/') }}/assets/images/small/img-5.jpg" alt="Card image cap">
+                    </center>
                     <div class="card-body">
                         <h4 class="card-title">Name : {{ $adminData->name }} </h4>
                         <hr><!-- 区切り下線をつけてくれる -->
@@ -17,7 +19,7 @@
                         <hr>
                         <h4 class="card-title">User Email : {{ $adminData->username }} </h4>
                         <hr>
-                        <a href="" class="btn btn-info btn-rounded waves-effect waves-light">Edit Plofile</a>
+                        <a href="{{  route('edit.profile') }}" class="btn btn-info btn-rounded waves-effect waves-light">Edit Plofile</a>
                     </div>
                 </div>
             </div>
