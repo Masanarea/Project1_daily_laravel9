@@ -1,5 +1,9 @@
 @extends('admin.admin_master')
 @section('admin')
+<script
+  src="https://code.jquery.com/jquery-3.6.1.min.js"
+  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+  crossorigin="anonymous"></script>
 
 
 <div class="page-content">
@@ -32,13 +36,13 @@
                             <div class="row mb-3">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Profile Image</label>
                                 <div class="col-sm-10">
-                                    <input name="profile_image" class="form-control" type="file" id="example-text-input">
+                                    <input name="profile_image" class="form-control" type="file" id="image">
                                 </div>
                             </div><!-- end row -->
                             <div class="row mb-3">
                                 <label for="example-text-input" class="col-sm-2 col-form-label"></label>
                                 <div class="col-sm-10">
-                                    <img class="rounded avatar-lg" src="{{  asset('backend/') }}/assets/images/small/img-5.jpg" alt="Card image cap">
+                                    <img id="showImage" class="rounded avatar-lg" src="{{  asset('backend/') }}/assets/images/small/img-5.jpg" alt="Card image cap">
                                 </div>
                             </div><!-- end row -->
                             <input type="submit" class-"btn btn-info waves-effect waves-light" value="Update Profile">
@@ -49,5 +53,18 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#image').change(function(e){
+            var reader = new FileReader();
+            reader.onload = function(e){
+                $('#showImage').attr('src', e.target.result)
+            }
+            let test = reader.readAsDataURL(e.target.files['0']);
+            console.log(test);//undefined
+        })
+    })
+</script>
 
 @endsection
