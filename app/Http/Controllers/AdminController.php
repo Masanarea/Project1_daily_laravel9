@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\MOdels\User;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
@@ -50,5 +51,14 @@ class AdminController extends Controller
         $data->name = $request->name;
         $data->email = $request->email;
         $data->username = $request->username;
+
+        if($request->file('profile_image')){
+            $file = $request->file('profile_image');
+            // この下からまだ理解できていない！
+            $filename = date('YmdHi').$file->getClientOriginalName();
+            $file->move(public_path('upload/public_images'));
+        }
+        $data->save();
+        return redirect()->route('admin.profile');
     }
 }
