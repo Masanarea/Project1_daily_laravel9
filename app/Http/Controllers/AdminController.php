@@ -54,9 +54,9 @@ class AdminController extends Controller
 
         if($request->file('profile_image')){
             $file = $request->file('profile_image');
-            // この下からまだ理解できていない！
             $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('upload/public_images'));
+            $file->move(public_path('upload/admin_images'),$filename);// $filename がなかったのでとんでもない文字列で名前保存されていた。
+            $data['profile_image'] = $filename;//これがないと写真名が当然保存されない
         }
         $data->save();
         return redirect()->route('admin.profile');
