@@ -59,6 +59,10 @@ class AdminController extends Controller
             $data['profile_image'] = $filename;//これがないと写真名が当然保存されない
         }
         $data->save();
-        return redirect()->route('admin.profile');
+        $notification = array(
+            'message' => 'Admin Profile Update Successfully',
+            'alert-type' => 'info',
+        );
+        return redirect()->route('admin.profile')->with($notification);
     }
 }
