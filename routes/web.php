@@ -17,7 +17,7 @@ use App\Http\Controllers\AdminController;
 // Breezeの導入によって更地になったweb.phpを確認...悲しい！(´Д｀)
 // 今後はauth.phpを参考にすればよさそう...
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.index');
 });
 
 // 具体例
@@ -31,6 +31,8 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/profile', 'Profile')->name('admin.profile');
     Route::get('/edit/profile', 'EditProfile')->name('edit.profile');
     Route::post('/store/profile', 'StoreProfile')->name('store.profile');
+    Route::get('/change/password', 'ChangePassword')->name('change.password');
+    Route::post('/update/password', 'UpdatePassword')->name('update.password');
 });
 
 Route::get('/dashboard', function () {

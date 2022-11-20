@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\MOdels\User;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -24,7 +25,7 @@ class AdminController extends Controller
         $request->session()->regenerateToken();
 
         $notification = array(
-            'message' => 'User Logout Successfully', 
+            'message' => 'User Logout Successfully',
             'alert-type' => 'success'
         );
 
@@ -57,10 +58,10 @@ class AdminController extends Controller
         $data->email = $request->email;
         $data->username = $request->username;
 
-        if($request->file('profile_image')){
+        if ($request->file('profile_image')) {
             $file = $request->file('profile_image');
             $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('upload/admin_images'),$filename);// $filename がなかったのでとんでもない文字列で名前保存されていた。
+            $file->move(public_path('upload/admin_images'), $filename);// $filename がなかったのでとんでもない文字列で名前保存されていた。
             $data['profile_image'] = $filename;//これがないと写真名が当然保存されない
         }
         $data->save();
@@ -69,5 +70,37 @@ class AdminController extends Controller
             'alert-type' => 'info',
         );
         return redirect()->route('admin.profile')->with($notification);
+    }
+
+    public function ChangePassword()
+    {
+        return view('admin.admin_change_password');
+    }
+
+    public function UpdatePassword(Request $request)
+    {
+        // Illuminate\Http\Requestオブジェクトによって提供されるvalidateメソッドを使用します。
+        // バリデーションルールにパスすると、コードは正常に実行され続けます。
+        // しかし、バリデーションに失敗するとIlluminate\Validation\ValidationException例外が投げられ、適切なエラーレスポンスが自動的にユーザーに返送されます。
+        // 伝統的なHTTPリクエスト処理中にバリデーションが失敗した場合、直前のURLへのリダイレクトレスポンスが生成されます。
+        $validateData = $request->validate([
+            'oldpassword' => 'required',
+            'newpassword' => 'required',
+            'confirm_password' => 'required|same:newpassword',
+
+        ]);
+
+        $hashedPassword = Auth::user()->password;
+        if (Hash::check($request->oldpassword,$hashedPassword )) {
+            $users = User::find(Auth::id());
+            $users->password = bcrypt($request->newpassword);
+            $users->save();
+
+            session()->flash('message','Password Updated Successfully');
+            return redirect()->back();
+        } else{
+            session()->flash('message','Old password is not match');
+            return redirect()->back();
+        }
     }
 }
